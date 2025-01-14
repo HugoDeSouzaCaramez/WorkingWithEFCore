@@ -1,3 +1,6 @@
 dotnet new console -n WorkingWithEFCore
 
 sqlite3 Northwind.db -init Northwind4SQLite.sql
+
+dotnet ef dbcontext scaffold "Filename=Northwind.db" Microsoft.EntityFrameworkCore.Sqlite --table Categories --table Products -o AutoGenModels --namespace WorkingWithEFCore.AutoGen 
+--data-annotations --context Northwind
