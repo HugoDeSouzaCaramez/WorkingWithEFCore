@@ -21,7 +21,7 @@ if (resultAdd.affected == 1)
     WriteLine($"Add product successful with ID: {resultAdd.productId}.");
 }
 
-/*var resultUpdate = IncreaseProductPrice(productNameStartsWith: "Bob", amount: 20M);
+var resultUpdate = IncreaseProductPrice(productNameStartsWith: "Bob", amount: 20M);
 
 if (resultUpdate.affected == 1)
 {
@@ -41,9 +41,9 @@ else
     WriteLine("Delete was canceled.");
 }
 
-ListProducts(productIdsToHighlight: new[] { resultUpdate.productId });*/
+ListProducts(productIdsToHighlight: new[] { resultUpdate.productId });
 
-var resultUpdateBetter = IncreaseProductPricesBetter(productNameStartsWith: "Bob", amount: 20M);
+/*var resultUpdateBetter = IncreaseProductPricesBetter(productNameStartsWith: "Bob", amount: 20M);
 
 if (resultUpdateBetter.affected > 0)
 {
@@ -63,4 +63,4 @@ if (ReadKey(intercept: true).Key == ConsoleKey.Enter)
 else
 {
     WriteLine("Delete was canceled.");
-}
+}*/

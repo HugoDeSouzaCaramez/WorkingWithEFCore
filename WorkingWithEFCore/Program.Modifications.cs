@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Storage; 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Packt.Shared;
@@ -73,22 +74,27 @@ partial class Program
     {
         using (Northwind db = new())
         {
-            IQueryable<Product>? products = db.Products?.Where(p => p.ProductName.StartsWith(productNameStartsWith));
-            
-            if ((products is null) || (!products.Any()))
+            using (IDbContextTransaction t = db.Database.BeginTransaction())
             {
-                WriteLine("No products found to delete.");
-                return 0;
-            }
-            else
-            {
-                if (db.Products is null) return 0;
+                WriteLine("Transaction isolation level: {0}", arg0: t.GetDbTransaction().IsolationLevel);
 
-                db.Products.RemoveRange(products);
+                IQueryable<Product>? products = db.Products?.Where(p => p.ProductName.StartsWith(productNameStartsWith));
+                
+                if ((products is null) || (!products.Any()))
+                {
+                    WriteLine("No products found to delete.");
+                    return 0;
+                }
+                else
+                {
+                    db.Products.RemoveRange(products);
+                }
+
+                int affected = db.SaveChanges();
+                t.Commit();
+                
+                return affected;
             }
-            int affected = db.SaveChanges();
-            
-            return affected;
         }
     }
 
