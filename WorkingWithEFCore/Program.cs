@@ -14,11 +14,11 @@
 
 //GetRandomProduct();
 
-var resultAdd = AddProduct(categoryId: 6, productName: "Bob's Burgers", price: 500M);
+var resultUpdate = IncreaseProductPrice(productNameStartsWith: "Bob", amount: 20M);
 
-if (resultAdd.affected == 1)
+if (resultUpdate.affected == 1)
 {
-    WriteLine($"Add product successful with ID: {resultAdd.productId}.");
+    WriteLine("Increase price success for ID: {resultUpdate.productId}.");
 }
 
-ListProducts(productIdsToHighlight: new int[] { resultAdd.productId });
+ListProducts(productIdsToHighlight: new[] { resultUpdate.productId });
