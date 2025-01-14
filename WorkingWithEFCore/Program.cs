@@ -11,3 +11,5 @@
 //QueryingProducts();
 
 QueryingWithLike();
+
+GetRandomProduct();
