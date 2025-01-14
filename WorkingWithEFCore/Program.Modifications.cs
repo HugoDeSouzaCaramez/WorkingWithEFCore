@@ -92,4 +92,42 @@ partial class Program
         }
     }
 
+    static (int affected, int[]? productIds) IncreaseProductPricesBetter(string productNameStartsWith, decimal amount)
+    {
+        using (Northwind db = new())
+        {
+            if (db.Products is null) return (0, null);
+
+            IQueryable<Product>? products = db.Products.Where(p => p.ProductName.StartsWith(productNameStartsWith));
+            int affected = products.ExecuteUpdate(s => s.SetProperty(
+                                                    p => p.Cost,
+                                                    p => p.Cost + amount));
+
+            int[] productIds = products.Select(p => p.ProductId).ToArray();
+
+            return (affected, productIds);
+        }
+    }
+
+    static int DeleteProductsBetter(string productNameStartsWith)
+    {
+        using (Northwind db = new())
+        {
+            int affected = 0;
+            IQueryable<Product>? products = db.Products?.Where(p => p.ProductName.StartsWith(productNameStartsWith));
+            
+            if ((products is null) || (!products.Any()))
+            {
+                WriteLine("No products found to delete.");
+                return 0;
+            }
+            else
+            {
+                affected = products.ExecuteDelete();
+            }
+
+            return affected;
+        }
+    }
+
 }
