@@ -90,4 +90,35 @@ partial class Program
             }
         }
     }
+
+    static void QueryingWithLike()
+    {
+        using (Northwind db = new())
+        {
+            SectionTitle("Pattern matching with LIKE.");
+            Write("Enter part of a product name: ");
+            string? input = ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Fail("You did not enter part of a product name.");
+                return;
+            }
+
+            IQueryable<Product>? products = db.Products?.Where(p => EF.Functions.Like(p.ProductName, $"%{input}%"));
+            
+            if ((products is null) || (!products.Any()))
+            {
+                Fail("No products found.");
+                return;
+            }
+
+            foreach (Product p in products)
+            {
+                WriteLine("{0} has {1} units in stock. Discontinued? {2}",
+                p.ProductName, p.Stock, p.Discontinued);
+            }
+        }
+    }
+
 }
