@@ -12,4 +12,4 @@
 
 QueryingWithLike();
 
-GetRandomProduct();
+//GetRandomProduct();
