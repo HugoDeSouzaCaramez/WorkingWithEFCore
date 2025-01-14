@@ -71,7 +71,10 @@ partial class Program
                 input = ReadLine();
             } while (!decimal.TryParse(input, out price));
 
-            IQueryable<Product>? products = db.Products?.Where(product => product.Cost > price).OrderByDescending(product => product.Cost);
+            IQueryable<Product>? products = db.Products?
+                                                .TagWith("Products filtered by price and sorted.")
+                                                .Where(product => product.Cost > price)
+                                                .OrderByDescending(product => product.Cost);
             
             if ((products is null) || (!products.Any()))
             {
