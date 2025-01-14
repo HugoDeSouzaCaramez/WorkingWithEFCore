@@ -5,3 +5,5 @@
 //WriteLine($"Provider: {db.Database.ProviderName}");
 
 QueryingCategories();
+
+FilteredIncludes();
