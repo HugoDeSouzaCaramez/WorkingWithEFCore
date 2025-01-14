@@ -21,6 +21,8 @@ public class Northwind : DbContext
         optionsBuilder.UseSqlite(connection);
 
         optionsBuilder.LogTo(Console.WriteLine, new[] { RelationalEventId.CommandExecuting }).EnableSensitiveDataLogging();
+
+        optionsBuilder.UseLazyLoadingProxies();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
