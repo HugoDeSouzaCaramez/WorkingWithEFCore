@@ -8,7 +8,7 @@ partial class Program
         {
             SectionTitle("Categories and how many products they have:");
 
-            IQueryable<Category>? categories = db.Categories?.Include(c => c.Products);
+            IQueryable<Category>? categories = db.Categories;//?.Include(c => c.Products);
             if ((categories is null) || (!categories.Any()))
             {
                 Fail("No categories found.");
@@ -36,7 +36,7 @@ partial class Program
                 input = ReadLine();
             } while (!int.TryParse(input, out stock));
 
-            IQueryable<Category>? categories = db.Categories?.Include(c => c.Products.Where(p => p.Stock >= stock));
+            IQueryable<Category>? categories = db.Categories;//?.Include(c => c.Products.Where(p => p.Stock >= stock));
 
             if ((categories is null) || (!categories.Any()))
             {
@@ -143,7 +143,7 @@ partial class Program
                 Fail("Product not found.");
                 return;
             }
-            
+
             WriteLine($"Random product: {p.ProductId} {p.ProductName}");
         }
     }

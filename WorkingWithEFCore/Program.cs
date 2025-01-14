@@ -4,12 +4,12 @@
 
 //WriteLine($"Provider: {db.Database.ProviderName}");
 
-//QueryingCategories();
+QueryingCategories();
 
 //FilteredIncludes();
 
 //QueryingProducts();
 
-QueryingWithLike();
+//QueryingWithLike();
 
 //GetRandomProduct();
